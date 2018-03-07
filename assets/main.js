@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
     // var latitude,longitude;
-    var api_key = "dd39280551e44f1bb34221739171701&q=";
+    var api_key = "e0c8bb1701af4f5ea30184357180503&q=";
     var loc;
 
     $.getJSON('http://ipinfo.io', function(d) {
