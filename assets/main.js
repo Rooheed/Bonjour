@@ -1,16 +1,16 @@
-// http://api.apixu.com/v1/forecast.json?key=dd39280551e44f1bb34221739171701&q=38.4127,27.1384&days=5
+
 
 $(document).ready(function() {
     // var latitude,longitude;
-    var api_key = "dd39280551e44f1bb34221739171701&q=";
+    var api_key = "e0c8bb1701af4f5ea30184357180503&q=";
     var loc;
 
     $.getJSON('http://ipinfo.io', function(d) {
         loc = d.loc.split(",");
 
         var apiLink = "http://api.apixu.com/v1/forecast.json?key=";
-        var days5 = "&days=5";
-        var api = apiLink + api_key + loc[0] + ',' + loc[1] + days5;
+        var days6 = "&days=6";
+        var api = apiLink + api_key + loc[0] + ',' + loc[1] + days6;
 
 
         $.getJSON(api, function(v1) {
@@ -77,14 +77,14 @@ $(document).ready(function() {
 
 
             (function backgroundImageChange() {
-                // if weather clear
+                // Om väder klart
                 if (clear.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/clear.jpg)');
                 } else if (clear.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/sunny.jpg)');
                 }
 
-                // if weather partly cloudy
+                // Om väder delvis molnigt
                 if (partlyCloudy.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/partly-cloudy-night.jpg)');
                 } else if (partlyCloudy.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
@@ -92,7 +92,7 @@ $(document).ready(function() {
                     console.log("hellooooo");
                 }
 
-                // if weather Cloudy
+                // Om väder molnigt
                 if (cloudy.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/cloudy-night.jpg)');
                 } else if (cloudy.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
@@ -100,33 +100,33 @@ $(document).ready(function() {
                 }
 
 
-                // if weather lightRain
+                // Om det är väderljus regn
                 if (lightRain.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/light-rain-night.jpg)');
                 } else if (lightRain.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/light-rain-day.jpg)');
                 }
 
-                // if weather heavyRain
+                // Om väder tungt regn
                 if (heavyRain.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/heavy-rain-night.jpg)');
                 } else if (heavyRain.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/heavy-rain-day.jpg)');
                 }
 
-                // if weather thunder
+                // Om vädret åska
                 if (thunder.indexOf(currentIconCode) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/thunder.jpg)');
                 }
 
-                // if weather fog
+                // Om väder dimma
                 if (fog.indexOf(currentIconCode) !== -1 && nightTimes.indexOf(hours) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/fog-night.jpg)');
                 } else if (fog.indexOf(currentIconCode) !== -1 && hours < 18 && hours > 6) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/fog-day.jpg)');
                 }
 
-                // if weather icePellets
+                // Om väderispellets
                 if (icePellets.indexOf(currentIconCode) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/ice-pellets.jpg)');
                 }
@@ -136,7 +136,7 @@ $(document).ready(function() {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/snow-light.jpg)');
                 }
 
-                // if weather Snow
+                // Om väder snö
                 if (snow.indexOf(currentIconCode) !== -1) {
                     $('#bg-image, #weather-box').css('background-image', 'url(img/snow.jpg)');
                 }
@@ -156,18 +156,6 @@ $(document).ready(function() {
                     $(el).html(daysOfWeek[(dayIdx + idx) % 7]);
                 });
 
-                //other solution way
-                //Date.prototype.getDayName = function() {
-                //    return daysOfWeek[this.getDay()];
-                //};
-
-                // $('.forecastText:first').html(day);
-                //   var currentDayNumber = daysOfWeek.indexOf(day);
-                //   currentDayNumber = (currentDayNumber + 1);
-                // $('.forecastText:not(:first)').each(function(el) {
-                //   $(this).html(daysOfWeek[currentDayNumber]);
-                //   currentDayNumber = (currentDayNumber + 1)%7;
-                // });
             })();
 
 
@@ -180,17 +168,17 @@ $(document).ready(function() {
 
 
                 $('.frc-temp').each(function(i) {
-                    // Added a 'units' property, so the temperature
-                    //  can track what type of unit it is displaying.
+                   // Tillagt en "enheter" egendom, så temperaturen
+                   // kan spåra vilken typ av enhet den visar.
                     $(this).data("units", "c");
                     $(this).html(Math.round(maxtempc[i]) + " - " + Math.round(mintempc[i]));
 
                 });
 
                 $('.frc-degree').on("click", function() {
-                    // As we use the .frc-temp el often, reference it once.
+                    // När vi använder .frc-temp el, hänvisa det en gång till.
                     var myTempEl = $(this).parent().find(".frc-temp");
-                    // This is the unique index of the clicked day.
+                    // Detta är det unika indexet för den klickade dagen.
 
                     var myIndex = $(".forecastday").index(
                         $(this).parents(".forecastday")
@@ -198,21 +186,21 @@ $(document).ready(function() {
 
 
                     /****
-                     * Above, we created a data attribute on the
-                     *  .frc-temp element to store the units. By
-                     *  doing this, the element becomes self-
-                     *  contained. Here, we can toggle the units
-                     *  based on that data attribute.
+                      * Ovan har jag skapat ett datattribut på
+                      * .frc-temp element för att lagra enheterna. Av
+                      * gör detta blir elementet själv-
+                      * Innehållet. Här kan jag byta enheterna
+                      * baserat på datatributet.
                      ****/
                     if (myTempEl.data("units") === "f") {
-                        // First, switch the unit attribute...
+                        // Först byt enhetens attribut ...
                         myTempEl.data("units", "c");
-                        // Then, replace the contents of the temp el
+                        // Därefter ersätt innehållet i temp el
                         myTempEl.hide().html(
                             Math.round(maxtempc[myIndex]) +
                             " - " +
                             Math.round(mintempc[myIndex])).fadeIn(700);
-                        // Then, set the contents of this to 'c'
+                        // Ange sedan innehållet till "c"
                         $(this).html(" &deg;C");
                         tempSwapForecast = true;
                     } else {
@@ -240,7 +228,7 @@ $(document).ready(function() {
 
             (function buttonDegree() {
                 $('#btn-degree').click(function() {
-                    /* Act on the event */
+                    /* Agera på evenemanget */
                     if (tempSwap === false) {
                         $('#weather').hide().html(Math.round(temp_c)).fadeIn(700);
                         $('#btn-degree').html("&deg;C");
@@ -257,7 +245,7 @@ $(document).ready(function() {
 
             (function buttonWind() {
                 $('#btn-wind').click(function() {
-                    /* Act on the event */
+                    /* Agera på evenemanget */
                     if (windSwap === false) {
                         $('#wind').hide().html(wind_kph).fadeIn(700);
                         $('#btn-wind').html("<strong>kph</strong>");
